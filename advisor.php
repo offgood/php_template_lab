@@ -121,10 +121,38 @@
                                             </span>
 
                                             <input class="form-control input-mask-phone" type="text" name="advi_phone"
-                                                id="form-field-mask-1" placeholder="(999) 999-9999"/>
+                                                id="form-field-mask-1" placeholder="(999) 999-9999" />
                                         </div>
                                     </div>
                                     <div class="col-sm-6"></div>
+                                </div>
+
+
+                                <?php
+                                    require_once('connect.php');
+                                    $strSQL ="SELECT * FROM t_subject";
+
+                                    $stmt = $conn->prepare($strSQL);
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll();                                
+                                ?>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">Subject
+                                        of</label>
+
+                                    <div class="col-sm-3">
+                                        <select class="chosen-select form-control" name="sub_id"
+                                            id="form-field-select-3" data-placeholder="Choose Faculty ...">
+                                            <?php foreach($result as $item){ ?>
+                                            <option value="<?=$item['sub_id']?>"><?=$item['sub_name']?></option>
+                                            <?php } $conn=null; ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-3">
+
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -133,8 +161,8 @@
                                     </label>
 
                                     <div class="col-sm-3">
-                                        <input type="password" id="pwdId" class="form-control pwds" pattern="^[a-z]{2,4}$"
-                                            required>
+                                        <input type="password" id="pwdId" class="form-control pwds"
+                                            pattern="^[a-z]{2,4}$" required>
                                         <div class="valid-feedback">Valid</div>
                                         <div class="invalid-feedback">a to z only (2 to 4 long)</div>
                                     </div>
@@ -147,39 +175,12 @@
                                     </label>
 
                                     <div class="col-sm-3">
-                                        <input type="password" id="cPwdId" class="form-control pwds" pattern="^[a-z]{2,4}$"
-                                            required>
+                                        <input type="password" id="cPwdId" class="form-control pwds"
+                                            pattern="^[a-z]{2,4}$" required>
                                         <div id="cPwdValid" class="valid-feedback">Valid</div>
                                         <div id="cPwdInvalid" class="invalid-feedback">a to z only (2 to 4 long)</div>
                                     </div>
                                     <div class="col-sm-6"></div>
-                                </div>
-
-                                <?php
-                                    require_once('connect.php');
-                                    $strSQL ="SELECT * FROM t_faculty";
-
-                                    $stmt = $conn->prepare($strSQL);
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();                                
-                                ?>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label no-padding-right"
-                                        for="form-field-1">Chosen</label>
-
-                                    <div class="col-sm-3">
-                                        <select class="chosen-select form-control" name="fac_id"
-                                            id="form-field-select-3" data-placeholder="Choose Faculty ...">
-                                            <?php foreach($result as $item){ ?>
-                                            <option value="<?=$item['fac_id']?>"><?=$item['fac_name']?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-3">
-
-                                    </div>
                                 </div>
 
                                 <div class="clearfix form-actions">
