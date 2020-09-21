@@ -14,6 +14,7 @@ if ( isset( $_POST['submit'] ) ) {
         echo $image_type.'<br>';
 
         $target_path = 'upload_images/'.$image_name;
+        //$directory = 'upload_images/';
 
         if ( empty( $image_name ) ) {
             $errorMsg = 'Please Enter Name';
@@ -23,6 +24,7 @@ if ( isset( $_POST['submit'] ) ) {
         || $image_type == 'image/png' || $image_type == 'image/gif' ) {
             if ( !file_exists( $target_path ) ) {
                 if ( $image_size < 500000 ) {
+                    //unlink($directory.$res['image_name']);
                     move_uploaded_file( $temp, $target_path );
                 } else {
                     $errorMsg = 'Your File To large Please Upload 5MB Size';
